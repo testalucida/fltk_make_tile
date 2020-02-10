@@ -74,7 +74,8 @@ void TileOrganizer::configure_columns(int widths_percent[]) {
 	}
 
 	_column_widths[_cols - 1] = (_W - ww);
-	organize();
+	if (_isOrganized) //if already organized, organize() again
+		organize();
 }
 
 void TileOrganizer::configure_rows(int heights_percent[]) {
@@ -86,7 +87,8 @@ void TileOrganizer::configure_rows(int heights_percent[]) {
 	}
 
 	_row_heights[_rows - 1] = (_H - hh);
-	organize();
+	if (_isOrganized) //if already organized, organize() again
+		organize();
 }
 
 Fl_Widget* TileOrganizer::add(widget_type wtype, int col, int row,
@@ -127,6 +129,7 @@ void TileOrganizer::organize() {
 			}
 		}
 	}
+	_isOrganized = true;
 }
 
 void TileOrganizer::add_widget(widget *pw, int col, int row) {
